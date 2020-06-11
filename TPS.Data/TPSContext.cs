@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using TPS.Data.Products;
 using TPS.Data.Users;
 
 namespace TPS.Data
@@ -10,5 +11,9 @@ namespace TPS.Data
         public DbSet<Employee> Employees { get; set; }
 
         public DbSet<Person> Customers { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Aisle> Aisles { get; set; }
     }
 }
