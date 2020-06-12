@@ -19,4 +19,11 @@ namespace TPS.Data.Products
     {
         int ProductId { get; set; }
     }
+
+    public abstract class ProductBase : IProduct
+    {
+        public Product Product { get; set; }
+
+        public int ProductId { get; set; }
+    }
 }

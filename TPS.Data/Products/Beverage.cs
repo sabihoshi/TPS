@@ -1,6 +1,9 @@
-﻿namespace TPS.Data.Products
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace TPS.Data.Products
 {
-    public class Beverage : IProduct
+    public class Beverage : ProductBase
     {
         public enum Temperatures
         {
@@ -10,8 +13,6 @@
         }
 
         public int BeverageId { get; set; }
-
-        public int ProductId { get; set; }
 
         public ulong Volume { get; set; }
 

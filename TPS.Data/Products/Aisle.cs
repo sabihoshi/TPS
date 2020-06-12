@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TPS.Data.Products
 {
@@ -8,6 +9,6 @@ namespace TPS.Data.Products
 
         public string Name { get; set; }
 
-        public ICollection<IProduct> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

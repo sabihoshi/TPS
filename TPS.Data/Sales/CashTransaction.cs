@@ -1,6 +1,6 @@
 ﻿namespace TPS.Data.Sales
 {
-    public class CashTransaction : TransactionBase
+    public class CashTransaction : Transaction
     {
         public int CashTransactionId { get; set; }
     }

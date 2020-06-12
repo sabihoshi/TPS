@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TPS.Data.Users
 {
@@ -21,5 +22,12 @@ namespace TPS.Data.Users
     public interface IPerson
     {
         int PersonId { get; set; }
+    }
+
+    public abstract class PersonBase : IPerson
+    {
+        public Person Person { get; set; }
+
+        public int PersonId { get; set; }
     }
 }

@@ -1,6 +1,9 @@
-﻿namespace TPS.Data.Products
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace TPS.Data.Products
 {
-    public class Meat : PerishableBase
+    public class Meat : Perishable
     {
         public enum Type
         {
@@ -10,6 +13,8 @@
             Pork,
             Seafood
         }
+
+        public int MeatId { get; set; }
 
         public Type MeatType { get; set; }
     }

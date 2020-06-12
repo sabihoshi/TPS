@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using TPS.Data.Users;
 
 namespace TPS.Data.Sales
 {
-    public abstract class TransactionBase
+    public class Transaction
     {
         public int TransactionId { get; set; }
 

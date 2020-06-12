@@ -1,12 +1,17 @@
-﻿namespace TPS.Data.Products
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace TPS.Data.Products
 {
-    public class Produce : PerishableBase
+    public class Produce : Perishable
     {
         public enum Groups
         {
             Vegetable,
             Fruit
         }
+
+        public int ProduceId { get; set; }
 
         public Groups Group { get; set; }
     }
