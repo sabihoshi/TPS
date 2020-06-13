@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPS", "TPS\TPS.csproj", "{0A724CD1-6D61-4064-9C95-60F8786C94EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPS.Data", "TPS.Data\TPS.Data.csproj", "{53145667-1239-4158-AF1F-3E35B9C3F979}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPS.Data", "TPS.Data\TPS.Data.csproj", "{53145667-1239-4158-AF1F-3E35B9C3F979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPS.WPF", "TPS.WPF\TPS.WPF.csproj", "{11D3B587-A877-4292-9A95-6E9483E1396E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0A724CD1-6D61-4064-9C95-60F8786C94EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A724CD1-6D61-4064-9C95-60F8786C94EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A724CD1-6D61-4064-9C95-60F8786C94EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A724CD1-6D61-4064-9C95-60F8786C94EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53145667-1239-4158-AF1F-3E35B9C3F979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53145667-1239-4158-AF1F-3E35B9C3F979}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53145667-1239-4158-AF1F-3E35B9C3F979}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53145667-1239-4158-AF1F-3E35B9C3F979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D3B587-A877-4292-9A95-6E9483E1396E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D3B587-A877-4292-9A95-6E9483E1396E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D3B587-A877-4292-9A95-6E9483E1396E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D3B587-A877-4292-9A95-6E9483E1396E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

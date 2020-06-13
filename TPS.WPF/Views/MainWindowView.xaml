@@ -1,0 +1,53 @@
+﻿<Window x:Class="TPS.WPF.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TPS.WPF.Views"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:tps="clr-namespace:TPS.WPF.ModernWPF"
+        xmlns:s="https://github.com/canton7/Stylet"
+        xmlns:viewModels="clr-namespace:TPS.WPF.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindowView"
+        Width="1366"
+        Height="768"
+        MinWidth="500"
+        MinHeight="500"
+        WindowStartupLocation="CenterScreen"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:TitleBar.ExtendViewIntoTitleBar="True">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <DataTemplate x:Key="NavigationViewHeaderTemplate">
+            <TextBlock Text="{Binding}" Margin="12,32,0,0" />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <ui:NavigationView
+            x:Name="NavView"
+            AlwaysShowHeader="True"
+            Header="{Binding SelectedItem.Content, RelativeSource={RelativeSource Self}, FallbackValue=' '}"
+            HeaderTemplate="{StaticResource NavigationViewHeaderTemplate}"
+            IsBackButtonVisible="Visible"
+            IsTitleBarAutoPaddingEnabled="False"
+            IsPaneOpen="True"
+            OpenPaneLength="240">
+            <ui:NavigationView.AutoSuggestBox>
+                <ui:AutoSuggestBox PlaceholderText="Hint text" QueryIcon="Find" />
+            </ui:NavigationView.AutoSuggestBox>
+
+            <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItemHeader Content="Transactions" />
+            <ui:NavigationViewItem Content="Make a Transaction" Tag="{Binding TestPage}"  Icon="Home" />
+            <ui:NavigationViewItem Content="View Transactions" Icon="Keyboard" />
+            <ui:NavigationViewItem Content="Transaction Editor" Icon="Library" />
+
+            </ui:NavigationView.MenuItems>
+
+            <ContentControl s:View.Model="{Binding Test}" />
+        </ui:NavigationView>
+    </Grid>
+</Window>
