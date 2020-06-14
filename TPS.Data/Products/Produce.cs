@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace TPS.Data.Products
+﻿namespace TPS.Data.Products
 {
     public class Produce : Perishable
     {

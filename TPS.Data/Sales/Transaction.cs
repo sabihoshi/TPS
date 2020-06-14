@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using TPS.Data.Users;
 
 namespace TPS.Data.Sales

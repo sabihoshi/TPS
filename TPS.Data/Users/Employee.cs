@@ -1,6 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace TPS.Data.Users
 {
@@ -13,7 +11,6 @@ namespace TPS.Data.Users
         public DateTime JoinedAt { get; set; }
 
         public DateTime? LeftAt { get; set; }
-
     }
 
     public interface IEmployee
