@@ -1,43 +1,34 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using ModernWpf.Controls;
-using ModernWpf.Navigation;
+﻿using ModernWpf.Controls;
 using Stylet;
+using StyletIoC;
 using TPS.WPF.Views;
-using Frame = ModernWpf.Controls.Frame;
 
 namespace TPS.WPF.ViewModels
 {
     public class MainWindowViewModel : Conductor<IScreen>.Collection.OneActive
     {
-        public TestViewModel Test { get; set;  } = new TestViewModel();
+        public MainWindowViewModel(IContainer ioc)
+        {
+            SettingsPage = ioc.Get<SettingsPageViewModel>();
+            ProductsView = ioc.Get<ProductsViewModel>();
+        }
+
+        public IScreen SettingsPage { get; }
+
+        public IScreen ProductsView { get; }
 
         protected override void OnViewLoaded()
         {
-            ((MainWindowView)View).NavView.SelectionChanged += NavViewOnSelectionChanged;
+            var navView = ((MainWindowView) View).NavView;
+            navView.SelectionChanged += NavViewOnSelectionChanged;
         }
 
         private void NavViewOnSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            if(((NavigationViewItem) args.SelectedItem).Tag is IScreen viewModel)
+            if (args.IsSettingsSelected)
+                ActivateItem(SettingsPage);
+            else if (((NavigationViewItem) args.SelectedItem).Tag is IScreen viewModel)
                 ActivateItem(viewModel);
-        }
-
-        private NavigationViewItem _selectedNavItem;
-
-        public NavigationViewItem SelectedNavItem
-        {
-            get => _selectedNavItem;
-            set => SetAndNotify(ref _selectedNavItem, value);
-        }
-
-
-        private Type GetPageType(NavigationViewItem item)
-        {
-            return item.Tag as Type;
         }
     }
 }
