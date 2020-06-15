@@ -5,7 +5,7 @@ using TPS.WPF.Views;
 
 namespace TPS.WPF.ViewModels
 {
-    public class MainWindowViewModel : Conductor<IScreen>.Collection.OneActive
+    public class MainWindowViewModel : Conductor<IScreen>.StackNavigation
     {
         public MainWindowViewModel(IContainer ioc)
         {
@@ -19,8 +19,16 @@ namespace TPS.WPF.ViewModels
 
         protected override void OnViewLoaded()
         {
+            // Terrible work around because the events do not conform
+            // to the signatures Stylet supports
             var navView = ((MainWindowView) View).NavView;
             navView.SelectionChanged += NavViewOnSelectionChanged;
+            navView.BackRequested += NavViewOnBackRequested;
+        }
+
+        private void NavViewOnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            GoBack();
         }
 
         private void NavViewOnSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

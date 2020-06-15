@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TPS.WPF"
              xmlns:ui="http://schemas.modernwpf.com/2019"
-             xmlns:s="https://github.com/canton7/Stylet">
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:animation="clr-namespace:TPS.WPF.ModernWPF.Animation">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

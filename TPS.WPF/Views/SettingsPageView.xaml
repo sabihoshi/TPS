@@ -10,7 +10,7 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <Grid Margin="24,0">
+        <ui:SimpleStackPanel Margin="24,0">
             <GroupBox Header="Theme Mode">
                 <ui:RadioButtons
                     SelectedItem="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme, Converter={StaticResource AppThemeConverter}}">
@@ -19,6 +19,12 @@
                     </ui:RadioButtons.ItemsSource>
                 </ui:RadioButtons>
             </GroupBox>
-        </Grid>
+
+            <GroupBox Header="Transition Style">
+                <ui:RadioButtons
+                    ItemsSource="{Binding Transitions}"
+                    SelectedItem="{Binding Transition}" />
+            </GroupBox>
+        </ui:SimpleStackPanel>
     </ScrollViewer>
 </UserControl>

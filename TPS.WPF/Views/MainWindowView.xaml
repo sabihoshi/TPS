@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:modernWpf="clr-namespace:TPS.WPF.ModernWPF"
 
     x:Name="Window"
     Title="Transaction Processing System"
@@ -51,7 +52,7 @@
                 <ui:NavigationViewItem Content="Transaction Editor" Icon="Library" />
             </ui:NavigationView.MenuItems>
 
-            <ContentControl s:View.Model="{Binding ActiveItem}" />
+            <modernWpf:AnimatedContentControl s:View.Model="{Binding ActiveItem}" />
         </ui:NavigationView>
     </Grid>
 </Window>
