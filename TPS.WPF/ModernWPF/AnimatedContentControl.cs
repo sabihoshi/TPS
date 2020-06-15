@@ -17,9 +17,16 @@ namespace TPS.WPF.ModernWPF
                 exit.Begin();
             }
 
-            var enter =
-                Transition.GetEnterAnimation(newContent, false);
-            enter.Begin();
+            if (newContent != null)
+            {
+                var enter =
+                    Transition.GetEnterAnimation(newContent, false);
+                enter.Begin();
+            }
+            else
+            {
+                base.OnContentChanged(oldContent, newContent);
+            }
         }
     }
 }

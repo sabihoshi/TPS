@@ -1,4 +1,5 @@
-﻿using ModernWpf.Controls;
+﻿using System.Collections.Generic;
+using ModernWpf.Controls;
 using Stylet;
 using StyletIoC;
 using TPS.WPF.Views;
@@ -7,6 +8,9 @@ namespace TPS.WPF.ViewModels
 {
     public class MainWindowViewModel : Conductor<IScreen>.StackNavigation
     {
+        private readonly Stack<NavigationViewItem> _history = new Stack<NavigationViewItem>();
+        private NavigationView _navView;
+
         public MainWindowViewModel(IContainer ioc)
         {
             SettingsPage = ioc.Get<SettingsPageViewModel>();
@@ -21,22 +25,36 @@ namespace TPS.WPF.ViewModels
         {
             // Terrible work around because the events do not conform
             // to the signatures Stylet supports
-            var navView = ((MainWindowView) View).NavView;
-            navView.SelectionChanged += NavViewOnSelectionChanged;
-            navView.BackRequested += NavViewOnBackRequested;
+            _navView = ((MainWindowView) View).NavView;
+            _navView.SelectionChanged += NavViewOnSelectionChanged;
+            _navView.BackRequested += (sender, args) => NavigateBack();
         }
 
-        private void NavViewOnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        private void NavigateBack()
         {
             GoBack();
+
+            // Work around to select the navigation item that this
+            // IScreen is a part of
+            _history.Pop();
+            _navView.SelectedItem = _history.Pop();
+            _navView.IsBackEnabled = _history.Count > 1;
         }
 
         private void NavViewOnSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             if (args.IsSettingsSelected)
+            {
                 ActivateItem(SettingsPage);
-            else if (((NavigationViewItem) args.SelectedItem).Tag is IScreen viewModel)
+                _history.Push((NavigationViewItem) _navView.SettingsItem);
+            }
+            else if ((args.SelectedItem as NavigationViewItem)?.Tag is IScreen viewModel)
+            {
                 ActivateItem(viewModel);
+                _history.Push((NavigationViewItem) _navView.SelectedItem);
+            }
+
+            _navView.IsBackEnabled = _history.Count > 1;
         }
     }
 }

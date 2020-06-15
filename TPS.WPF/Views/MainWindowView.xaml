@@ -22,7 +22,6 @@
 
     <Grid>
         <Grid
-            Margin="{Binding TitleBarMargin}"
             VerticalAlignment="Top"
             Height="{Binding ElementName=NavView, Path=CompactPaneLength}"
             Canvas.ZIndex="1">
@@ -36,6 +35,7 @@
         <ui:NavigationView
             x:Name="NavView"
             AlwaysShowHeader="True"
+            IsBackEnabled="{Binding IsBackEnabled}"
             Header="{Binding SelectedItem.Content, RelativeSource={RelativeSource Self}, FallbackValue=' '}"
             HeaderTemplate="{StaticResource NavigationViewHeaderTemplate}">
             <ui:NavigationView.AutoSuggestBox>
