@@ -14,11 +14,14 @@ namespace TPS.WPF.ViewModels
         {
             SettingsPage = ioc.Get<SettingsPageViewModel>();
             ProductsView = ioc.Get<ProductsViewModel>();
+            PurchaseView = ioc.Get<PurchaseViewModel>();
         }
 
         public IScreen SettingsPage { get; }
 
         public IScreen ProductsView { get; }
+
+        public IScreen PurchaseView { get; }
 
         protected override void OnViewLoaded()
         {

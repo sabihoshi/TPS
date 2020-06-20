@@ -44,10 +44,10 @@
 
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItemHeader Content="Products" />
-                <ui:NavigationViewItem Content="Product List" Tag="{Binding ProductsView}" Icon="Home" />
+                <ui:NavigationViewItem Content="Product List"  Icon="Home" Tag="{Binding ProductsView}" />
 
                 <ui:NavigationViewItemHeader Content="Transactions" />
-                <ui:NavigationViewItem Content="Make a Transaction" Icon="Home" />
+                <ui:NavigationViewItem Content="Make a Transaction" Icon="Home" Tag="{Binding PurchaseView}" />
                 <ui:NavigationViewItem Content="View Transactions" Icon="Keyboard" />
                 <ui:NavigationViewItem Content="Transaction Editor" Icon="Library" />
             </ui:NavigationView.MenuItems>

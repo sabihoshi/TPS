@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="TPS.WPF.Views.PurchaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:TPS.WPF.ViewModels"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:modernWpf="clr-namespace:TPS.WPF.ModernWPF">
+    <UserControl.Resources>
+        <viewModels:ProductGroupKeyConverter x:Key="ProductGroupKeyConverter" />
+
+        <CollectionViewSource
+            x:Key="Products" Source="{Binding Products}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription
+                    PropertyName="Name"
+                    Converter="{StaticResource ProductGroupKeyConverter}" />
+            </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="Price" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <DataTemplate x:Key="ProductListViewTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Ellipse
+                    Grid.RowSpan="2"
+                    Width="32" Height="32"
+                    Margin="6"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Fill="{DynamicResource SystemControlBackgroundBaseMediumBrush}" />
+
+                <TextBlock
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Text="{Binding Name, Mode=OneTime}"
+                    Style="{DynamicResource BaseTextBoxStyle}"
+                    Margin="12,6,0,0" />
+
+                <TextBlock
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Text="{Binding Price, Mode=OneTime}"
+                    Style="{DynamicResource BodyTextBlockStyle}"
+                    Margin="12,0,0,6" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+
+    <modernWpf:OptionControl
+        HeaderText="Double click items to add it to your cart">
+        <ListBox
+            Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+            ItemTemplate="{StaticResource ProductListViewTemplate}"
+            ItemsSource="{Binding Source={StaticResource Products}}"
+            VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+            VirtualizingPanel.VirtualizationMode="Recycling">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding Name, Mode=OneTime}"
+                                Style="{DynamicResource TitleTextBlockStyle}" />
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+        </ListBox>
+
+        <modernWpf:OptionControl.Options>
+            <ui:SimpleStackPanel MinWidth="200">
+                <Button Content="Add Selected Item">
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout>
+                            <StackPanel>
+                                <ui:NumberBox
+                                    Header="How many items do you want to add?"
+                                    Value="1"
+                                    SmallChange="1" LargeChange="5"
+                                    SpinButtonPlacementMode="Inline"
+                                    Margin="0,0,0,12" />
+                                <Button
+                                    Click="{s:Action AddItem}"
+                                    Content="Confirm" />
+                            </StackPanel>
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
+                </Button>
+
+                <Button Content="Empty cart">
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout>
+                            <StackPanel>
+                                <TextBlock
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Text="All items will be removed. Do you want to continue?"
+                                    Margin="0,0,0,12" />
+                                <Button
+                                    Click="{s:Action EmptyCart}"
+                                    Content="Yes, empty my cart" />
+                            </StackPanel>
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
+                </Button>
+            </ui:SimpleStackPanel>
+        </modernWpf:OptionControl.Options>
+    </modernWpf:OptionControl>
+</UserControl>

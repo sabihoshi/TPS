@@ -11,7 +11,7 @@ namespace TPS.WPF.ViewModels
     {
         public ProductsViewModel(TPSContext context) => Products = new BindableCollection<Product>(context.Products);
 
-        public BindableCollection<Product> Products { get; set; }
+        public BindableCollection<Product> Products { get; }
     }
 
     public class ProductGroupKeyConverter : IValueConverter
