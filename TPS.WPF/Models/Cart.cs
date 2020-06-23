@@ -6,23 +6,31 @@ namespace TPS.WPF.Models
 {
     public class Cart
     {
-        public List<Purchase<Product>> Items { get; set; }
+        public Dictionary<Product, Purchase> Items { get; } = new Dictionary<Product, Purchase>();
 
-        public decimal Total => Items.Sum(i => i.Total);
+        public decimal Total => Items.Values.Sum(i => i.Total);
+
+        public void AddOrUpdate(Product product, uint amount)
+        {
+            var count = amount;
+
+            if (Items.TryGetValue(product, out var existing)) count += existing.Amount;
+
+            Items[product] = new Purchase(product, count);
+        }
     }
 
-    public class Purchase<T>
+    public class Purchase
     {
-        public Purchase(T item, decimal price, uint amount)
+        public Purchase(Product item, uint amount)
         {
             Item = item;
-            Price = price;
             Amount = amount;
         }
 
-        public T Item { get; }
+        public Product Item { get; }
 
-        public decimal Price { get; }
+        public decimal Price => Item.Price;
 
         public decimal Total => Price * Amount;
 

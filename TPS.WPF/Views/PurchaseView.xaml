@@ -80,26 +80,37 @@
         </ListBox>
 
         <modernWpf:OptionControl.Options>
-            <ui:SimpleStackPanel MinWidth="200">
-                <Button Content="Add Selected Item">
+            <ui:SimpleStackPanel>
+                <Button 
+                    x:Name="AddCartButton"
+                    Content="Add Selected Item">
                     <ui:FlyoutService.Flyout>
                         <ui:Flyout>
                             <StackPanel>
                                 <ui:NumberBox
                                     Header="How many items do you want to add?"
-                                    Value="1"
+                                    Value="{Binding Amount}"
                                     SmallChange="1" LargeChange="5"
+                                    Minimum="1" Maximum="100"
                                     SpinButtonPlacementMode="Inline"
                                     Margin="0,0,0,12" />
-                                <Button
-                                    Click="{s:Action AddItem}"
-                                    Content="Confirm" />
+                                <StackPanel>
+                                    <Button
+                                        Click="{s:Action AddProduct}"
+                                        Content="Confirm" />
+                                    <ui:ProgressRing
+                                        IsActive="{Binding IsLoading}"
+                                        Height="60"
+                                        Width="60" />
+                                </StackPanel>
                             </StackPanel>
                         </ui:Flyout>
                     </ui:FlyoutService.Flyout>
                 </Button>
 
-                <Button Content="Empty cart">
+                <Button 
+                    x:Name="EmptyCartButton"
+                    Content="Empty cart">
                     <ui:FlyoutService.Flyout>
                         <ui:Flyout>
                             <StackPanel>
@@ -114,6 +125,9 @@
                         </ui:Flyout>
                     </ui:FlyoutService.Flyout>
                 </Button>
+
+                <!-- Items purchased view -->
+
             </ui:SimpleStackPanel>
         </modernWpf:OptionControl.Options>
     </modernWpf:OptionControl>
