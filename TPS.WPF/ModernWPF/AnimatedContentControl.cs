@@ -12,7 +12,8 @@ namespace TPS.WPF.ModernWPF
         {
             if (oldContent != null)
             {
-                var exit = Transition.GetExitAnimation(oldContent,
+                var exit = Transition.GetExitAnimation(
+                    oldContent,
                     false);
                 exit.Begin();
             }

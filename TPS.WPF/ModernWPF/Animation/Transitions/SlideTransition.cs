@@ -34,7 +34,10 @@ namespace TPS.WPF.ModernWPF.Animation.Transitions
     /// </summary>
     public sealed class SlideTransition : Transition, ISlideNavigationTransitionInfo2
     {
-        public SlideTransition(Direction effect) => Effect = effect;
+        public SlideTransition(Direction effect)
+        {
+            Effect = effect;
+        }
 
         protected override Animation GetEnterAnimation(FrameworkElement element, bool movingBackwards)
         {

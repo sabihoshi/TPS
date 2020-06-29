@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ModernWpf.Controls;
-using ModernWpf.Controls.Primitives;
 using Stylet;
 using TPS.Data;
 using TPS.Data.Products;
@@ -18,13 +17,16 @@ namespace TPS.WPF.ViewModels
 
         protected override void OnViewLoaded()
         {
-            var view = ((PurchaseView) View);
+            var view = (PurchaseView) View;
 
             _flyouts[nameof(view.AddCartButton)] = FlyoutService.GetFlyout(view.AddCartButton) as Flyout;
             _flyouts[nameof(view.EmptyCartButton)] = FlyoutService.GetFlyout(view.EmptyCartButton) as Flyout;
         }
 
-        public PurchaseViewModel(TPSContext context) => Products = new BindableCollection<Product>(context.Products);
+        public PurchaseViewModel(TPSContext context)
+        {
+            Products = new BindableCollection<Product>(context.Products);
+        }
 
         public BindableCollection<Product> Products { get; }
 
@@ -34,9 +36,9 @@ namespace TPS.WPF.ViewModels
 
         public uint Amount { get; set; } = 1;
 
-        public bool IsLoading { get; set; } = false;
+        public bool IsLoading { get; set; }
 
-        public bool FlyOutIsOpen { get; set; } = false;
+        public bool FlyOutIsOpen { get; set; }
 
         public void HideFlyout()
         {

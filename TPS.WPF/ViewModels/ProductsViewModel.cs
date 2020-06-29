@@ -9,7 +9,10 @@ namespace TPS.WPF.ViewModels
 {
     public class ProductsViewModel : Screen
     {
-        public ProductsViewModel(TPSContext context) => Products = new BindableCollection<Product>(context.Products);
+        public ProductsViewModel(TPSContext context)
+        {
+            Products = new BindableCollection<Product>(context.Products);
+        }
 
         public BindableCollection<Product> Products { get; }
     }

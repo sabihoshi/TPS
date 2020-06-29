@@ -81,7 +81,7 @@
 
         <modernWpf:OptionControl.Options>
             <ui:SimpleStackPanel>
-                <Button 
+                <Button
                     x:Name="AddCartButton"
                     Content="Add Selected Item">
                     <ui:FlyoutService.Flyout>
@@ -108,7 +108,7 @@
                     </ui:FlyoutService.Flyout>
                 </Button>
 
-                <Button 
+                <Button
                     x:Name="EmptyCartButton"
                     Content="Empty cart">
                     <ui:FlyoutService.Flyout>

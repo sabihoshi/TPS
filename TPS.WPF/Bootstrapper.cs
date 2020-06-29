@@ -10,14 +10,15 @@ namespace TPS.WPF
     {
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
-            builder.Bind<TPSContext>().ToFactory(container =>
-            {
-                var options = new DbContextOptionsBuilder<TPSContext>()
-                    .UseSqlite(@"Data Source=.\master_data.db")
-                    .Options;
+            builder.Bind<TPSContext>().ToFactory(
+                container =>
+                {
+                    var options = new DbContextOptionsBuilder<TPSContext>()
+                        .UseSqlite(@"Data Source=.\master_data.db")
+                        .Options;
 
-                return new TPSContext(options);
-            });
+                    return new TPSContext(options);
+                });
         }
     }
 }

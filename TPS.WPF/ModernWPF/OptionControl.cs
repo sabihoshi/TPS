@@ -9,7 +9,8 @@ namespace TPS.WPF.ModernWPF
     {
         static OptionControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(OptionControl),
+            DefaultStyleKeyProperty.OverrideMetadata(
+                typeof(OptionControl),
                 new FrameworkPropertyMetadata(typeof(OptionControl)));
         }
 
