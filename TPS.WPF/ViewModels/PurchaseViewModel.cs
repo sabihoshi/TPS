@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Windows.Controls;
 using ModernWpf.Controls;
 using Stylet;
 using TPS.Data;
@@ -12,16 +11,7 @@ namespace TPS.WPF.ViewModels
 {
     public class PurchaseViewModel : Screen
     {
-        private readonly Dictionary<string, Flyout> _flyouts = new Dictionary<string, Flyout>();
-        private Flyout? _flyout;
-
-        protected override void OnViewLoaded()
-        {
-            var view = (PurchaseView) View;
-
-            _flyouts[nameof(view.AddCartButton)] = FlyoutService.GetFlyout(view.AddCartButton) as Flyout;
-            _flyouts[nameof(view.EmptyCartButton)] = FlyoutService.GetFlyout(view.EmptyCartButton) as Flyout;
-        }
+        private PurchaseView _view;
 
         public PurchaseViewModel(TPSContext context)
         {
@@ -30,36 +20,34 @@ namespace TPS.WPF.ViewModels
 
         public BindableCollection<Product> Products { get; }
 
-        public Cart Cart { get; } = new Cart();
+        public static Cart Cart { get; } = new Cart();
 
         public Product? SelectedProduct { get; set; } = null!;
 
-        public uint Amount { get; set; } = 1;
+        public uint Amount { get; set; }
 
-        public bool IsLoading { get; set; }
-
-        public bool FlyOutIsOpen { get; set; }
-
-        public void HideFlyout()
+        protected override void OnViewLoaded()
         {
-            _flyout?.Hide();
+            _view = (PurchaseView) View;
         }
 
-        public void EmptyCart() { }
-
-        public async Task AddProduct()
+        public void HideFlyout(Func<PurchaseView, Button> button)
         {
+            var flyOut = FlyoutService.GetFlyout(button(_view)) as Flyout;
+            flyOut?.Hide();
+        }
+
+        public void EmptyCart(object parent)
+        {
+            HideFlyout(b => b.EmptyCartButton);
+        }
+
+        public void AddProduct()
+        {
+            if (SelectedProduct is null)
+                return;
+
             Cart.AddOrUpdate(SelectedProduct, Amount);
-
-            await ArtificialWaitTime(TimeSpan.FromSeconds(3));
-        }
-
-        public async Task ArtificialWaitTime(TimeSpan length)
-        {
-            IsLoading = true;
-            await Task.Delay(TimeSpan.FromSeconds(5));
-            IsLoading = false;
-            FlyOutIsOpen = false;
         }
     }
 }

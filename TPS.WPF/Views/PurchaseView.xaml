@@ -64,6 +64,7 @@
             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
             ItemTemplate="{StaticResource ProductListViewTemplate}"
             ItemsSource="{Binding Source={StaticResource Products}}"
+            SelectedItem="{Binding SelectedProduct, Mode=OneWayToSource}"
             VirtualizingPanel.IsVirtualizingWhenGrouping="True"
             VirtualizingPanel.VirtualizationMode="Recycling">
             <ListBox.GroupStyle>
@@ -98,10 +99,6 @@
                                     <Button
                                         Click="{s:Action AddProduct}"
                                         Content="Confirm" />
-                                    <ui:ProgressRing
-                                        IsActive="{Binding IsLoading}"
-                                        Height="60"
-                                        Width="60" />
                                 </StackPanel>
                             </StackPanel>
                         </ui:Flyout>
@@ -119,7 +116,7 @@
                                     Text="All items will be removed. Do you want to continue?"
                                     Margin="0,0,0,12" />
                                 <Button
-                                    Click="{s:Action EmptyCart}"
+                                    Command="{s:Action EmptyCart}"
                                     Content="Yes, empty my cart" />
                             </StackPanel>
                         </ui:Flyout>
